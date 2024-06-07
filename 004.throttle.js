@@ -21,6 +21,7 @@ function throttle(func, wait) {
           clearTimeout(timeoutId);
           if (lastArgs) {
             func.apply(this, lastArgs);
+            isThrottled = true;
             lastArgs = null;
             timeoutFn();
           }
