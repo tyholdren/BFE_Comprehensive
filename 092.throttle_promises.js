@@ -1,5 +1,6 @@
 /**
  * https://bigfrontend.dev/problem/throttle-Promises
+ * https://bigfrontend.dev/problem/throttle-Promises
  * @param {() => Promise<any>} func
  * @param {number} max
  * @return {Promise}
