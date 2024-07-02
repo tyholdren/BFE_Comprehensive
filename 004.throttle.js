@@ -1,4 +1,5 @@
 // This is a JavaScript coding problem from BFE.dev
+// https://bigfrontend.dev/problem/implement-basic-throttle
 
 /**
  * @param {(...args:any[]) => any} func

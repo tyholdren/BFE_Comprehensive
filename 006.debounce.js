@@ -1,5 +1,5 @@
 // This is a JavaScript coding problem from BFE.dev
-
+// https://bigfrontend.dev/problem/implement-basic-debounce
 /**
  * @param {(...args: any[]) => any} func
  * @param {number} wait

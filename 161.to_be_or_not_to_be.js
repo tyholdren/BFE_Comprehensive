@@ -1,4 +1,5 @@
 /**
+ * https://bigfrontend.dev/problem/jest-assertion
  * interface Matcher {
  *  toBe(data: any): void
  * }
