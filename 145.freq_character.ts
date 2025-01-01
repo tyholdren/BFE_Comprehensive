@@ -22,3 +22,30 @@ function count(str: string): string | string[] {
   }
   return mostFreqChars[0];
 }
+
+/**
+ * https://bigfrontend.dev/problem/most-frequently-occurring-character
+ * @param {string} str
+ * @returns {string | string[]}
+ */
+function _count(str) {
+  const arr = [];
+  const map = new Map();
+  let max = 0;
+
+  for (const char of str) {
+    map.set(char, map.get(char) + 1 || 1);
+    max = Math.max(max, map.get(char));
+  }
+
+  for (const [key, val] of [...map.entries()]) {
+    if (val === max) {
+      arr.push(key);
+    }
+  }
+
+  if (arr.length > 1) {
+    return arr;
+  }
+  return arr[0];
+}
