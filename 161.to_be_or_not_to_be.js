@@ -9,26 +9,29 @@
  * @returns {Matcher & {not: Matcher}}
  */
 function myExpect(input) {
-  function toBe(expected) {
-    const result = Object.is(expected, input);
-    if (!result) {
-      throw new Error('there was an error');
+  function compare(expected, isNegate) {
+    const isEqual = Object.is(input, expected);
+    if (isEqual) {
+      if (!isNegate) {
+        return true;
+      }
+      throw Error;
+    } else {
+      if (isNegate) {
+        return true;
+      }
+      throw Error;
     }
-    return result;
-  }
-
-  function notToBe(expected) {
-    const result = Object.is(expected, input);
-    if (result) {
-      throw new Error('there was an error');
-    }
-    return result;
   }
 
   return {
-    toBe,
+    toBe: expected => {
+      return compare(expected, false);
+    },
     not: {
-      toBe: notToBe,
+      toBe: expected => {
+        return compare(expected, true);
+      },
     },
   };
 }
