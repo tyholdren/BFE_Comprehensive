@@ -15,10 +15,6 @@ const TYPES = {
   MAP: '[object Map]',
 };
 
-function isStringOrNumberType(el) {
-  return el === TYPES.STRING || el === TYPES.NUMBER;
-}
-
 function classNames(...args) {
   const classNames = [];
 
@@ -26,13 +22,18 @@ function classNames(...args) {
     for (let i = 0; i < args.length; i++) {
       const className = args[i];
       const type = getType(className);
-      console.log({ type });
 
       if (type === TYPES.STRING || type === TYPES.NUMBER) {
         classNames.push(className);
       } else if (type === TYPES.OBJECT || type === TYPES.MAP) {
         for (const [key, value] of Object.entries(className)) {
-          if (value) {
+          const valueType = getType(value);
+
+          if (valueType === TYPES.OBJECT) {
+            traverse([value]);
+          } else if (Array.isArray(value) && value.length) {
+            traverse(value.flat(Infinity));
+          } else if (value) {
             classNames.push(key);
           }
         }
