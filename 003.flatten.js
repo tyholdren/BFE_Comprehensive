@@ -46,3 +46,27 @@ function flat(arr, depth = 1) {
 
   return result.reverse();
 }
+
+function __flat(arr, depth = 1) {
+  const stack = [];
+  const results = [];
+
+  arr.forEach(el => {
+    const entry = { value: el, remDepth: depth };
+    stack.push(entry);
+  });
+
+  while (stack.length) {
+    const { value, remDepth } = stack.pop();
+    if (Array.isArray(value) && remDepth > 0) {
+      value.forEach(el => {
+        const entry = { value: el, remDepth: remDepth - 1 };
+        stack.push(entry);
+      });
+    } else {
+      results.push(value);
+    }
+  }
+
+  return results.reverse();
+}
