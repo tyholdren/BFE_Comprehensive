@@ -22,3 +22,23 @@ function flatten(root) {
 
   return;
 }
+
+function _flatten(root) {
+  if (root == null) {
+    return [];
+  }
+
+  const results = [];
+  const q = [root];
+
+  while (q.length) {
+    const curNode = q.shift();
+
+    for (const child of curNode.children) {
+      q.push(child);
+    }
+
+    results.push(curNode);
+  }
+  return results;
+}
