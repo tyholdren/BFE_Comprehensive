@@ -2,6 +2,32 @@
 
 window.myLocalStorage = {
   getItem(key) {
+    return JSON.parse(window.localStorage.getItem(key));
+  },
+
+  setItem(key, value, maxAge) {
+    if (maxAge === 0) return;
+
+    if (maxAge) {
+      setTimeout(() => {
+        this.removeItem(key);
+      }, maxAge);
+    }
+
+    window.localStorage.setItem(key, JSON.stringify(value));
+  },
+
+  removeItem(key) {
+    window.localStorage.removeItem(key);
+  },
+
+  clear() {
+    window.localStorage.clear();
+  },
+};
+
+window._myLocalStorage = {
+  getItem(key) {
     return window.localStorage.getItem(key);
   },
 
