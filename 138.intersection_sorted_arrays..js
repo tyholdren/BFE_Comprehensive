@@ -24,3 +24,23 @@ function intersect(arr1, arr2) {
 
   return result;
 }
+
+/**
+ * https://bigfrontend.dev/problem/intersection-of-two0-sorted-Arrays
+ * @param {number[]} arr1 - integers
+ * @param {number[]} arr2 - integers
+ * @returns {number[]}
+ */
+function _intersect(arr1, arr2) {
+  const overlap = [];
+  let i2 = 0;
+
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] === arr2[i2]) {
+      overlap.push(arr1[i]);
+      i2 += 1;
+    }
+  }
+
+  return overlap;
+}
