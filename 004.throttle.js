@@ -6,7 +6,7 @@
  * @param {number} wait
  * @returns {(...args:any[]) => any}
  */
-function throttle(func, wait) {
+function _throttle(func, wait) {
   let isThrottled = false;
   let lastArgs = null;
   let timeoutId = null;
@@ -28,9 +28,43 @@ function throttle(func, wait) {
           }
         }, wait);
       };
+
       timeoutFn();
     } else {
       lastArgs = args;
+    }
+  };
+}
+
+// This is a JavaScript coding problem from BFE.dev
+
+/**
+ * @param {(...args:any[]) => any} func
+ * @param {number} wait
+ * @returns {(...args:any[]) => any}
+ */
+function throttle(func, wait) {
+  let isThrottled = false;
+  let lastArgs = null;
+
+  function handleThrottle() {
+    isThrottled = true;
+    func.apply(this, lastArgs);
+    lastArgs = null;
+
+    setTimeout(() => {
+      isThrottled = false;
+      if (lastArgs !== null) {
+        handleThrottle();
+      }
+    }, wait);
+  }
+
+  return function (...args) {
+    lastArgs = args;
+
+    if (!isThrottled) {
+      handleThrottle();
     }
   };
 }
